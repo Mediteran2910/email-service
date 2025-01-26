@@ -16,21 +16,34 @@ const limiter = rateLimit({
   message: "Too many request from this IP",
 });
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
+});
+
+var corsOptions = {
+  origin: "https://mediteran2910.github.io/exercise/contact.html",
+  optionsSuccessStatus: 200,
+};
+
 app.get("/", (req, res) => {
   res.send("Hello World, again");
 });
 
-app.post("/contact", limiter, (req, res) => {
-  const { mailOptions } = req.body;
+app.post("/contact", cors(corsOptions), limiter, (req, res) => {
+  const { subject, text, html, senderName } = req.body;
   console.log("THIS IS REQ BODY", req.body);
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
+  const mailOptions = {
+    from: senderName,
+    to: "marindonadini00@gmail.com",
+    subject: subject,
+    text: text,
+    html: html,
+  };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
