@@ -34,12 +34,13 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contact", cors(corsOptions), limiter, (req, res) => {
-  const { subject, text, html, senderName } = req.body;
+  const { subject, text, html, senderName, senderEmail } = req.body;
   console.log("THIS IS REQ BODY", req.body);
 
   const mailOptions = {
-    from: senderName,
+    from: process.env.EMAIL_USER,
     to: "marindonadini00@gmail.com",
+    replyTo: senderEmail,
     subject: subject,
     text: text,
     html: html,
@@ -47,10 +48,11 @@ app.post("/contact", cors(corsOptions), limiter, (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error);
+      console.log("Error sendign email", error);
       return res.status(500).json({
         success: false,
         message: "An error occurred while sending message",
+        error: error.message,
       });
     }
     console.log(`Message sent: ${info.response}, ${mailOptions.text}`);
