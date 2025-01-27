@@ -25,14 +25,10 @@ const respondMessage = async (response, responseData) => {
 contactForm.addEventListener("submit", async (evt) => {
   evt.preventDefault();
 
-  let mailOptions = {
-    from: nameInput.value,
-    to: "marindonadini00@gmail.com",
-    subject: "Zepralak question",
-    text: `Hi, you have new message from: ${nameInput.value},
-    you can contact me on ${emailInput.value} ,
-    message:${message.value}`,
-    html: `<p><b>You have new message from:</b> ${nameInput.value}</p> `,
+  let infoObj = {
+    name: nameInput.value,
+    email: emailInput.value,
+    message: message.value,
   };
 
   try {
@@ -41,7 +37,7 @@ contactForm.addEventListener("submit", async (evt) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ mailOptions }),
+      body: JSON.stringify({ infoObj }),
     });
     const responseData = await response.json();
     respondMessage(response, responseData);
