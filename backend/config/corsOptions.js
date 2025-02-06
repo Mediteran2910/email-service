@@ -1,8 +1,8 @@
 const corsOptions = {
   origin: [
     "https://mediteran2910.github.io",
-    "https://zepralak.io",
-    "https://example27765.io",
+    "https://example24.com",
+    "https://example48.com",
   ],
   methods: "POST",
   optionsSuccessStatus: 200,

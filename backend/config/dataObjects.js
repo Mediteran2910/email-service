@@ -9,7 +9,7 @@ const dataObjects = {
       message: true,
     }),
     from: process.env.EMAIL_USER,
-    subject: "Villa Jure reservation",
+    subject: "Villa Mediteran reservation",
     to: process.env.EMAIL_USER,
     generateContent: (infoObj) => {
       const sanitizedInfoObj = {
@@ -22,7 +22,7 @@ const dataObjects = {
       return {
         replyTo: sanitizedInfoObj.email,
         text: `Hi, my name is ${sanitizedInfoObj.name}, 
-          I'm contacting you about Villa Jure, 
+          I'm contacting you about Villa Mediteran, 
           I would like to make a reservation, 
           You can contact me on ${sanitizedInfoObj.email}`,
         html: `<p>Hi my name is: ${sanitizedInfoObj.name}</p>
@@ -31,7 +31,7 @@ const dataObjects = {
       };
     },
   },
-  "https://zepralak.io": {
+  "https://example24.com": {
     from: process.env.EMAIL_USER,
     subject: "Zepralak Development",
     to: process.env.EMAIL_USER,
