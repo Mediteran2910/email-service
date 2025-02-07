@@ -8,9 +8,9 @@ const dataObjects = {
       email: true,
       message: true,
     }),
-    from: process.env.EMAIL_USER,
+    from: process.env.EMAIL_USERNEW,
     subject: "Villa Mediteran reservation",
-    to: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USERNEW,
     generateContent: (infoObj) => {
       const sanitizedInfoObj = {
         name: xss(infoObj.name),
