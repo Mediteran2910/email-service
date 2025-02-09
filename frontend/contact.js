@@ -49,3 +49,10 @@ contactForm.addEventListener("submit", async (evt) => {
     });
   }
 });
+
+nameInput.addEventListener("focus", () => {
+  console.log("Input is focused");
+  fetch("http://localhost:3000/wake-me-up").catch((err) =>
+    console.error("Waking server failed", err)
+  );
+});

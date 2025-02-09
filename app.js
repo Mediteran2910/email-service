@@ -13,6 +13,11 @@ const port = 3000;
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.get("/wake-me-up", (req, res) => {
+  console.log("Morning sir, what do you need");
+  res.status(200).send("Good morning");
+});
+
 app.post("/contact", limiter, async (req, res) => {
   const origin = req.get("origin");
   console.log("Request Origin: ", origin);
